@@ -21,7 +21,7 @@ import models.RawModel;
 // Loads all of the specified model information into OpenGL
 public class Loader {
 	
-	// Create lists for managing all of the vaos and vbos
+	// Create lists for managing all of the vaos, vbos, and textures
 	private List<Integer> vaos = new ArrayList<>();
 	private List<Integer> vbos = new ArrayList<>();
 	private List<Integer> textures = new ArrayList<>();
@@ -36,6 +36,7 @@ public class Loader {
 		return new RawModel(vaoID, indices.length);
 	}
 	
+	// Loads in a texture
 	public int loadTexture(String fileName) {
 		Texture texture = null;
 		try {
