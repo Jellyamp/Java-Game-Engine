@@ -1,0 +1,14 @@
+#version 400 core
+
+// Specify the inputs from the program
+in vec3 colour;
+
+// Specify the outputs for OpenGL
+out vec4 out_Color;
+
+void main(void) {
+	
+	// Output the color to OpenGL
+	out_Color = vec4(colour, 1.0);
+
+}

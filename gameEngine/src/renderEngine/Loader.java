@@ -28,7 +28,7 @@ public class Loader {
 	}
 	
 	// Deletes all of the values stored in the lists for vaos and vbos
-	public void cleanUP() {
+	public void cleanUp() {
 		for(int vao:vaos) {
 			GL30.glDeleteVertexArrays(vao);
 		}
