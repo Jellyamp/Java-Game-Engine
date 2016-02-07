@@ -1,14 +1,16 @@
 #version 400 core
 
 // Specify the inputs from the program
-in vec3 colour;
+in vec2 pass_textureCoords;
 
 // Specify the outputs for OpenGL
 out vec4 out_Color;
 
+uniform sampler2D textureSampler;
+
 void main(void) {
 	
-	// Output the color to OpenGL
-	out_Color = vec4(colour, 1.0);
+	// Output the texture to OpenGL
+	out_Color = texture(textureSampler, pass_textureCoords);
 
 }

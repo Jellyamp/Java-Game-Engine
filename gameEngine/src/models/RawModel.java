@@ -1,4 +1,4 @@
-package renderEngine;
+package models;
 
 // Creates a base model
 public class RawModel {
