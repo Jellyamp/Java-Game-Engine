@@ -1,5 +1,6 @@
 package renderEngine;
 
+// Creates a base model
 public class RawModel {
 	
 	private int vaoID;
