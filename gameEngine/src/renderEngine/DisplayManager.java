@@ -17,8 +17,10 @@ public class DisplayManager {
 	// Creates the Display for the game
 	public static void createDisplay() {
 		
-		// Creates the variable that will hold the OpenGL context
-		ContextAttribs attribs = new ContextAttribs(3, 2).withForwardCompatible(true).withProfileCore(true);
+		// Creates the variable that will hold the OpenGL context with version 3.2 in forward compatibility mode
+		ContextAttribs attribs = new ContextAttribs(3, 2)
+				.withForwardCompatible(true)
+				.withProfileCore(true);
 		
 		// Creates the display with the given width and height as well as the title and OpenGl context
 		try {
