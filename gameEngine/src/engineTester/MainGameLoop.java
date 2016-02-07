@@ -6,6 +6,7 @@ import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.RawModel;
 import renderEngine.Renderer;
+import shaders.StaticShader;
 
 public class MainGameLoop {
 
@@ -14,9 +15,10 @@ public class MainGameLoop {
 		// Create the Display
 		DisplayManager.createDisplay();
 		
-		// Creates a new loader and renderer
+		// Creates a new loader, renderer, and a new static shader
 		Loader loader = new Loader();
 		Renderer renderer = new Renderer();
+		StaticShader shader = new StaticShader();
 		
 		float[] vertices = {
 				-0.5f,  0.5f, 0,	//v0
@@ -38,13 +40,16 @@ public class MainGameLoop {
 			renderer.prepare();
 			// game logic
 			// Display the model
+			shader.start();
 			renderer.render(model);
+			shader.stop();
 			DisplayManager.updateDisplay();
 			
 		}
 		
-		// Delete all of the vaos and vbos and destroy the display
-		loader.cleanUP();
+		// Delete all of the vaos, vbos, shaders, and destroy the display
+		shader.cleanUp();
+		loader.cleanUp();
 		DisplayManager.closeDisplay();
 		
 	}
