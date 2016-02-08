@@ -21,6 +21,7 @@ public class Renderer {
 	
 	private Matrix4f projectionMatrix;
 	
+	// Renderer Constructor
 	public Renderer(StaticShader shader) {
 		createProjectionMatrix();
 		shader.start();
