@@ -42,7 +42,7 @@ public class MainGameLoop {
 		
 		// Main game loop
 		while(!Display.isCloseRequested()) {
-			entity.increaseRotation(0, 1, 1);
+			entity.increaseRotation(1, 1, 0);
 			camera.move();
 			renderer.prepare();
 			shader.start();
