@@ -12,6 +12,7 @@ import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
 import renderEngine.OBJLoader;
+import terrains.Terrain;
 import textures.ModelTexture;
 
 public class MainGameLoop {
@@ -25,25 +26,29 @@ public class MainGameLoop {
 		Loader loader = new Loader();
 		
 		// Create the model
-		RawModel model = OBJLoader.loadObjModel("dragon", loader);
-		ModelTexture loadedTexture = new ModelTexture(loader.loadTexture("dragonTexture"));
+		RawModel model = OBJLoader.loadObjModel("tree", loader);
+		ModelTexture loadedTexture = new ModelTexture(loader.loadTexture("tree"));
 		TexturedModel staticModel = new TexturedModel(model, loadedTexture);
 		ModelTexture texture = staticModel.getTexture();
-		texture.setShineDamper(10);
-		texture.setReflectivity(1);
 		
-		Entity entity = new Entity(staticModel, new Vector3f(0, -5, -25), 0, 0, 0, 1);
-		Light light = new Light(new Vector3f(0, 0, -20), new Vector3f(1, 1, 1));
+		Entity entity = new Entity(staticModel, new Vector3f(0, 0, -25), 0, 0, 0, 1);
+		Light light = new Light(new Vector3f(3000, 2000, 2000), new Vector3f(1, 1, 1));
 		
-		Camera camera = new Camera();
+		Terrain terrain = new Terrain(0, -1, loader, new ModelTexture(loader.loadTexture("grass")));
+		Terrain terrain2 = new Terrain(-1, -1, loader, new ModelTexture(loader.loadTexture("grass")));
 		
+		Camera camera = new Camera();		
 		MasterRenderer renderer = new MasterRenderer();
 		
 		// Main game loop
 		while(!Display.isCloseRequested()) {
 			entity.increaseRotation(0, 1, 0);
 			camera.move();
+			
+			renderer.processTerrain(terrain);
+			renderer.processTerrain(terrain2);
 			renderer.processEntity(entity);
+			
 			renderer.render(light, camera);
 			DisplayManager.updateDisplay();
 			
