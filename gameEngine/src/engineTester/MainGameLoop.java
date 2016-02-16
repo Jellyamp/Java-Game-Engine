@@ -47,9 +47,9 @@ public class MainGameLoop {
 		
 		//************************************
 		
-		ModelData bunny = OBJFileLoader.loadOBJ("stanfordBunny");
-		RawModel bunnyModel = loader.loadToVAO(bunny.getVertices(), bunny.getTextureCoords(), bunny.getNormals(),
-				bunny.getIndices());
+		ModelData person = OBJFileLoader.loadOBJ("person");
+		RawModel personModel = loader.loadToVAO(person.getVertices(), person.getTextureCoords(), person.getNormals(),
+				person.getIndices());
 		ModelData tree = OBJFileLoader.loadOBJ("tree");
 		RawModel treeModel = loader.loadToVAO(tree.getVertices(), tree.getTextureCoords(), tree.getNormals(),
 				tree.getIndices());
@@ -68,8 +68,8 @@ public class MainGameLoop {
 		// RawModel grassModel = OBJLoader.loadObjModel("grassModel", loader);
 		// RawModel fernModel = OBJLoader.loadObjModel("fern", loader);
 
-		TexturedModel bunnyTextured = new TexturedModel(bunnyModel, new ModelTexture(
-				loader.loadTexture("white")));
+		TexturedModel personTextured = new TexturedModel(personModel, new ModelTexture(
+				loader.loadTexture("playerTexture")));
 		TexturedModel treeTextured = new TexturedModel(treeModel, new ModelTexture(
 				loader.loadTexture("tree")));
 		TexturedModel grassTextured = new TexturedModel(grassModel, 
@@ -114,10 +114,10 @@ public class MainGameLoop {
 		Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap);
 		Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap);
 
-		Camera camera = new Camera();
 		MasterRenderer renderer = new MasterRenderer();
 
-		Player player = new Player(bunnyTextured, new Vector3f(100, 0, -50), 0, 0, 0, 1);
+		Player player = new Player(personTextured, new Vector3f(100, 0, -50), 0, 180, 0, 0.6f);
+		Camera camera = new Camera(player);
 		
 		// Main game loop
 		while (!Display.isCloseRequested()) {
