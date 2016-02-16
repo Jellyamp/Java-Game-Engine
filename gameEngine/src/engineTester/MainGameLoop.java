@@ -36,10 +36,10 @@ public class MainGameLoop {
 		
 		//*******TERRAIN TEXTURES*************
 		
-		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy"));
-		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("dirt"));
+		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy2"));
+		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud"));
 		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("pinkFlowers"));
-		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
+		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("mossPath256"));
 		
 		TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, 
 				gTexture, bTexture);
@@ -111,8 +111,8 @@ public class MainGameLoop {
 
 		Light light = new Light(new Vector3f(3000, 2000, 2000), new Vector3f(1, 1, 1));
 
-		Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap);
-		Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap);
+		Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap, "heightmap");
+		Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap, "heightmap");
 
 		MasterRenderer renderer = new MasterRenderer();
 
