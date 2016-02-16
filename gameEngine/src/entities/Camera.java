@@ -80,7 +80,6 @@ public class Camera {
 			float angleChange = Mouse.getDX() * 0.3f;
 			angleAroundPlayer -= angleChange;
 		}
-		
 	}
 		
 }

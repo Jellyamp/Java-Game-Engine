@@ -1,6 +1,7 @@
 package entities;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 
 import models.TexturedModel;
@@ -56,6 +57,10 @@ public class Player extends Entity {
 		} else {
 			this.currentSpeed = 0;
 		}
+		
+//		if(Mouse.isButtonDown(0)){ 
+//			float angleChange = Mouse.getDX() * 0.3f; super.increaseRotation(0, -angleChange, 0) ; 
+//		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
 			this.currentTurnSpeed = -TURN_SPEED;
