@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import entities.Camera;
 import entities.Entity;
 import entities.Light;
 import entities.Player;
+import guis.GuiRenderer;
+import guis.GuiTexture;
 import models.RawModel;
 import models.TexturedModel;
 import objConverter.ModelData;
@@ -124,12 +127,18 @@ public class MainGameLoop {
 
 		Light light = new Light(new Vector3f(3000, 2000, 2000), new Vector3f(1, 1, 1));
 
-		
-
 		MasterRenderer renderer = new MasterRenderer();
 
 		Player player = new Player(personTextured, new Vector3f(100, 0, -50), 0, 180, 0, 0.6f);
 		Camera camera = new Camera(player);
+		
+		List<GuiTexture> guis = new ArrayList<>();
+		GuiTexture gui = new GuiTexture(loader.loadTexture("health"), new Vector2f(-0.65f, -0.9f), new Vector2f(0.3f, 0.3f));
+		guis.add(gui);
+		GuiTexture gui2 = new GuiTexture(loader.loadTexture("socuwan"), new Vector2f(-0.7f, 0.8f), new Vector2f(0.25f, 0.25f));
+		guis.add(gui2);
+		
+		GuiRenderer guiRenderer = new GuiRenderer(loader);
 		
 		// Main game loop
 		while (!Display.isCloseRequested()) {
@@ -142,12 +151,14 @@ public class MainGameLoop {
 				renderer.processEntity(entity);
 			}
 			renderer.render(light, camera);
+			guiRenderer.render(guis);
 			DisplayManager.updateDisplay();
 
 		}
 
 		// Delete all of the vaos, vbos, shaders, and destroy the display
 
+		guiRenderer.cleanUp();
 		renderer.cleanUp();
 		loader.cleanUp();
 		DisplayManager.closeDisplay();
