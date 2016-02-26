@@ -56,9 +56,9 @@ public class MainGameLoop {
 		ModelData tree = OBJFileLoader.loadOBJ("tree");
 		RawModel treeModel = loader.loadToVAO(tree.getVertices(), tree.getTextureCoords(), tree.getNormals(),
 				tree.getIndices());
-		ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
-		RawModel lowPolyTreeModel = loader.loadToVAO(lowPolyTree.getVertices(), lowPolyTree.getTextureCoords(), lowPolyTree.getNormals(),
-				lowPolyTree.getIndices());
+		ModelData pineTree = OBJFileLoader.loadOBJ("pine");
+		RawModel pineTreeModel = loader.loadToVAO(pineTree.getVertices(), pineTree.getTextureCoords(), pineTree.getNormals(),
+				pineTree.getIndices());
 		ModelData grass = OBJFileLoader.loadOBJ("grassModel");
 		RawModel grassModel = loader.loadToVAO(grass.getVertices(), grass.getTextureCoords(), grass.getNormals(),
 				grass.getIndices());
@@ -83,8 +83,8 @@ public class MainGameLoop {
 		TexturedModel flowerTextured = new TexturedModel(grassModel, 
 				new ModelTexture(loader.loadTexture("flower")));
 		TexturedModel fernTextured = new TexturedModel(fernModel, fernTextureAtlas);
-		TexturedModel lowPolyTreeTextured = new TexturedModel(lowPolyTreeModel, 
-				new ModelTexture(loader.loadTexture("lowPolyTree")));
+		TexturedModel pineTreeTextured = new TexturedModel(pineTreeModel, 
+				new ModelTexture(loader.loadTexture("pine")));
 		
 		grassTextured.getTexture().setHasTransparency(true);
 		grassTextured.getTexture().setUseFakeLighting(true);
@@ -116,7 +116,7 @@ public class MainGameLoop {
 				float x = random.nextFloat() * 800 - 400;
 				float z = random.nextFloat() * -600;
 				float y = terrain.getHeightOfTerrain(x, z);
-				entities.add(new Entity(lowPolyTreeTextured, new Vector3f(x, y, z), 0, random.nextFloat() * 360,
+				entities.add(new Entity(pineTreeTextured, new Vector3f(x, y, z), 0, random.nextFloat() * 360,
 						0, random.nextFloat() * 0.1f + 0.6f));
 				x = random.nextFloat() * 800 - 400;
 				z = random.nextFloat() * -600;
@@ -126,7 +126,10 @@ public class MainGameLoop {
 		}
 
 		Light light = new Light(new Vector3f(3000, 2000, 2000), new Vector3f(1, 1, 1));
-
+		List<Light> lights = new ArrayList<>();
+		lights.add(light);
+		lights.add(new Light(new Vector3f(-200, 10, -200), new Vector3f(10, 0, 0)));
+		lights.add(new Light(new Vector3f(200, 10, 200), new Vector3f(0, 0, 10)));
 		MasterRenderer renderer = new MasterRenderer();
 
 		Player player = new Player(personTextured, new Vector3f(100, 0, -50), 0, 180, 0, 0.6f);
@@ -150,7 +153,7 @@ public class MainGameLoop {
 			for (Entity entity : entities) {
 				renderer.processEntity(entity);
 			}
-			renderer.render(light, camera);
+			renderer.render(lights, camera);
 			guiRenderer.render(guis);
 			DisplayManager.updateDisplay();
 
