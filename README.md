@@ -1,2 +1,2 @@
 # Java-Game-Engine
-A game engine written in Java
+A tutorial project to help me learn engine development and git.
